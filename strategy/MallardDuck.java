@@ -1,0 +1,20 @@
+package strategy;
+
+public class MallardDuck extends Duck {
+
+    public MallardDuck() {
+
+        this.flyBehavior = new FlyWithWings();
+        this.quackBehavior = new NormalQuack();
+        
+    }
+
+    @Override
+    public void display() {
+
+        System.out.println("I am a Mallard Duck");
+
+    }
+
+    
+}
