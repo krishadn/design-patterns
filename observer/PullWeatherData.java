@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * push implementation
+ * pull implementation
  */
-public class WeatherData implements Subject {
+public class PullWeatherData implements PullSubject {
 
-    private List<Observer> observers;
+ private List<PullObserver> observers;
     private float temperature;
     private float humidity;
     private float pressure;
 
-    public WeatherData() {
+    public PullWeatherData() {
         observers = new ArrayList<>();
     }
 
     @Override
-    public void registerObserver(Observer o) {
+    public void registerObserver(PullObserver o) {
         observers.add(o);
     }
 
     @Override
-    public void removeObserver(Observer o) {
+    public void removeObserver(PullObserver o) {
         observers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
-        for(Observer o: observers) {
-            o.update(temperature, humidity, pressure);
+        for(PullObserver o: observers) {
+            o.update();
         }
     }
 
@@ -43,6 +43,18 @@ public class WeatherData implements Subject {
         this.humidity = humidity;
         this.pressure = pressure;
         measurementsChanged();
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public float getHumidity() {
+        return humidity;
+    }
+
+    public float getPressure() {
+        return pressure;
     }
 
 }

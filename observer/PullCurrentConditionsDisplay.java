@@ -1,19 +1,20 @@
 package observer;
 
-public class CurrentConditionsDisplay implements Observer, Display {
+public class PullCurrentConditionsDisplay implements PullObserver, Display {
+    
     private float temperature;
     private float humidity;
-    private WeatherData weatherData;
+    private PullWeatherData weatherData;
 
-    public CurrentConditionsDisplay(WeatherData weatherData) {
+    public PullCurrentConditionsDisplay(PullWeatherData weatherData) {
         this.weatherData = weatherData;
         weatherData.registerObserver(this);
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
-        this.temperature = temp;
-        this.humidity = humidity;
+    public void update() {
+        this.temperature = weatherData.getTemperature();
+        this.humidity = weatherData.getHumidity();
         display();
     }
 
@@ -23,3 +24,4 @@ public class CurrentConditionsDisplay implements Observer, Display {
     }
     
 }
+

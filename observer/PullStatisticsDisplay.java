@@ -1,13 +1,13 @@
 package observer;
 
-public class StatisticsDisplay implements Observer, Display {
-
+public class PullStatisticsDisplay implements PullObserver, Display{
+    
     private double average;
     private double maximum;
     private double minimum;
-    private WeatherData weatherData;
+    private PullWeatherData weatherData;
 
-    public StatisticsDisplay(WeatherData weatherData) {
+    public PullStatisticsDisplay(PullWeatherData weatherData) {
         this.weatherData = weatherData;
         weatherData.registerObserver(this);
         average = 0;
@@ -21,7 +21,8 @@ public class StatisticsDisplay implements Observer, Display {
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
+    public void update() {
+        double temp = weatherData.getTemperature();
         if (average == 0) {
             average = temp;
         } else {
@@ -32,9 +33,6 @@ public class StatisticsDisplay implements Observer, Display {
         minimum = Math.min(minimum, temp);
         display();
     }
-
-    
-
 
     
 }
