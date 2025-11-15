@@ -29,6 +29,7 @@ public class App {
 
         System.out.printf("%s - %.2f %n", bev3.getDescription(), bev3.cost());
 
+        System.out.println((char)65);
 
     }
     
